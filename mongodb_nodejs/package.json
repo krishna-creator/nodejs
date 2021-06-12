@@ -1,0 +1,18 @@
+{
+  "name": "mongodb_nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index"
+  },
+  "keywords": [],
+  "author": "vamsi",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.6.9"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
