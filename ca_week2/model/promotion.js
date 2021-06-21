@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-require("mongoose-currency").loadType("mongoose");
+require("mongoose-currency").loadType(mongoose);
 const Currency = mongoose.Types.Currency;
-const Schema = mongoose.Schema();
+const Schema = mongoose.Schema;
 
 const promoschema = new Schema({
   name: {
