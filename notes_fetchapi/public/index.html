@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Notes app</title>
+</head>
+<body>
+    <div>
+    <h1>Add Notes</h1>
+    <form onsubmit="submitted()">
+    <input id="msg" type="text" placeholder="Eg: Walking with dog" name="msg">
+    <input id="submit" type="submit" value="ADD">
+    </form>
+    <div id="p"></div>
+</div>
+<script>
+    var p=document.getElementById('p');
+    var msg=document.getElementById('msg');
+    fetch("http://localhost:3000/notes").then(result=>{
+        result.json().then(result=>{
+            p.innerHTML=result.map((obj)=>{
+                // console.log(obj);
+                return `<p>
+                    ${obj.msg}<a href="/edit.html?id=${obj._id}" id="edit">Edit</a><br><small>${obj.createdAt.substring(0,16).split('T')}</small>
+                    <a href="/" onclick="clicked('${obj._id}')" id="delete">Delete</a>
+                    </p>`
+            }).join('')
+        })
+    }).catch(err=>{
+        console.log(err)
+    });
+    submitted=()=>{
+        var response={"msg":msg.value}
+        fetch("http://localhost:3000/notes",{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(response)
+        }).then(result=>{
+            result.json().then(result=>{
+                console.log(result)
+            })
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+    clicked=(id)=>{
+        // var param=window.location.search;
+        // var id = new URLSearchParams(param).get('id');
+        console.log(id)
+        fetch(`http://localhost:3000/notes/${id}`,{
+            method:"DELETE",
+            headers:{
+                'Content-Type':'application/json'
+            }
+        })
+        .then(result=>{
+            console.log(result);
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
+</script>
+</body>
+</html>

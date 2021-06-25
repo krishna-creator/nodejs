@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="edit.css">
+    <title>edit notes</title>
+</head>
+<body>
+    <div id="container">hi</div>
+    <a href="/">Back to home</a>
+    <script>
+        var container=document.getElementById('container');
+        var param=window.location.search;
+        var id = new URLSearchParams(param).get('id');
+        fetch(`http://localhost:3000/notes/${id}`).then(result=>{
+            result.json().then(obj=>{
+                var m=obj.msg
+                container.innerHTML=`
+                        <p>Id:${obj._id}</p>
+                        <p id="msg">${m}</p>
+                        <input id="edit" type="text" name="msg" placeholder="Type text here">
+                        <input id="submit" type="submit" onclick="clicked()" value="Edit">
+                        <p>Created at : ${obj.createdAt.substring(0,16).split('T')} <br>
+                            Updated at : ${obj.updatedAt.substring(0,16).split('T')}
+                    `
+                })
+            }).catch(err=>{
+                console.log(err);
+            });
+        clicked=()=>{
+            var edit=document.getElementById('edit');
+            var response={"msg":edit.value};
+            fetch(`http://localhost:3000/notes/${id}`,{
+                method:"PUT",
+                headers:{
+                'Content-Type':'application/json'
+                },
+                body:JSON.stringify(response)
+            })
+            .then(result=>{
+                console.log(result);
+            }).catch(err=>{
+                console.log(err);
+            })
+            location.reload();
+        }
+    </script>
+</body>
+</html>

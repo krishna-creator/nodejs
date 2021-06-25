@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  background: #bdc3c7;
+}
+div {
+  width: 100%;
+  text-align: center;
+}
+h1 {
+  color: #e67e22;
+  font-size: 50px;
+}
+p {
+  text-align: left;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  padding: 20px;
+  font-size: 30px;
+  background: #fff;
+  box-shadow: 0 6px 5px #666;
+}
+p:hover {
+  transform: scale(1.05) translate(-47.5%);
+}
+
+input {
+  width: 300px;
+  height: 40px;
+  margin-right: 10px;
+  font-size: 20px;
+}
+#submit {
+  font-size: 20px;
+  width: 120px;
+  height: 40px;
+  background: #e74c3c;
+}
+a {
+  position: absolute;
+  right: 15px;
+  font-size: 25px;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+#edit {
+  color: #e1b12c;
+}
+#delete {
+  color: #c23616;
+}
